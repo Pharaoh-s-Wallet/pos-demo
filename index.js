@@ -69,7 +69,7 @@ const PORT = process.env.PORT || 3001;
 async function startServer() {
     try {
         // Initialize database
-        //await initializeDatabase();
+        await initializeDatabase();
         
         // Initialize NZDD service
         await nzddService.initialize();
