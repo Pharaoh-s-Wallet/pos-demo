@@ -158,7 +158,8 @@ document.getElementById('checkout-btn').addEventListener('click', async () => {
         modal.show();
 
         // Connect to WebSocket for payment status updates
-        const ws = new WebSocket(`ws://${window.location.host}?clientId=${encodeURIComponent(order.orderId)}`);
+        const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        const ws = new WebSocket(`${protocol}//${window.location.host}?clientId=${encodeURIComponent(order.orderId)}`);
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data);
             const statusElement = document.getElementById('payment-status');
