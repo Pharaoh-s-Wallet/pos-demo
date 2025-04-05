@@ -34,8 +34,26 @@ const sampleProducts = [
     }
 ];
 
-async function initializeDatabase() {
+async function databaseExists() {
     try {
+        // Check if products table exists
+        const result = await db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='products'");
+        return !!result;
+    } catch (error) {
+        return false;
+    }
+}
+
+async function initializeDatabase(force = false) {
+    try {
+        // Check if database already exists
+        const exists = await databaseExists();
+        
+        if (exists && !force) {
+            console.log('Database already exists. Skipping initialization. Use force=true to reinitialize.');
+            return;
+        }
+        
         // Read and execute schema
         const schema = await fs.readFile(path.join(__dirname, 'schema.sql'), 'utf8');
         const statements = schema.split(';').filter(stmt => stmt.trim());
