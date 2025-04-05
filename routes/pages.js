@@ -4,6 +4,11 @@ import nzddService from '../services/nzddService.js';
 
 const router = express.Router();
 
+// Login page
+router.get('/login', (req, res) => {
+    res.render('login', { layout: false });
+});
+
 // Home/POS page
 router.get('/', async (req, res) => {
     try {
