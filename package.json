@@ -1,0 +1,30 @@
+{
+  "name": "nzdd-pos-server",
+  "version": "1.0.0",
+  "description": "POS server for NZDD payments",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "process-payments": "node scripts/processPayments.js",
+    "test-payment": "node scripts/testPaymentFlow.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.7",
+    "ethers": "^6.11.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "qrcode": "^1.5.3",
+    "ws": "^8.16.0",
+    "ejs": "^3.1.9",
+    "express-ejs-layouts": "^2.5.1",
+    "moment": "^2.30.1",
+    "uuid": "^9.0.1",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+} 
