@@ -25,8 +25,12 @@ async function processApprovedPayments() {
       try {
         console.log(`Processing order ${order.id}...`);
         
+        // Fix floating-point precision issues by rounding to 2 decimal places
+        const fixedAmount = parseFloat(parseFloat(order.total_amount).toFixed(2));
+        console.log(`Original amount: ${order.total_amount}, Fixed amount: ${fixedAmount}`);
+        
         // Convert amount to smallest units (NZDD has 6 decimals)
-        const amountInUnits = ethers.parseUnits(order.total_amount.toString(), 6);
+        const amountInUnits = ethers.parseUnits(fixedAmount.toString(), 6);
         
         // Collect the payment
         const result = await nzddService.collectPayment(order.customer_wallet, amountInUnits);
